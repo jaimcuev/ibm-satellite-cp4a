@@ -59,7 +59,6 @@ resource "ibm_is_instance_volume_attachment" "example" {
   name = "att-${var.project}-${var.type}-${var.environment}-${format("%03s", count.index + 1)}"
   iops = 100
   capacity = element(local.volumes, count.index).capacity
-  zone = element(local.volumes, count.index).zone
   delete_volume_on_attachment_delete = true
   delete_volume_on_instance_delete = true
   volume_name = "vol-${var.project}-${var.type}-${var.environment}-${format("%03s", count.index + 1)}"
