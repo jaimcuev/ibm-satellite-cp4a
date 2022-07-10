@@ -24,3 +24,8 @@ resource ibm_is_subnet "vpc_subnet" {
   resource_group = data.ibm_resource_group.resource_group.id
   public_gateway = element(ibm_is_public_gateway.vpc_gateway, count.index).id
 }
+
+resource "ibm_is_security_group" "vpc_security_group" {
+  name = "security-group-${var.project}-${var.environment}-001"
+  vpc  = ibm_is_vpc.vpc_vm.id
+}
