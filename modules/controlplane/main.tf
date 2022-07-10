@@ -21,7 +21,7 @@ resource "ibm_is_instance" "vpc_controlplane_vsi" {
   
   vpc = var.vpc_id
   zone = element(var.vsi_zones, count.index)
-  keys = var.rhel_ssh_key_id
+  keys = [var.rhel_ssh_key_id]
   tags = ["use:satloc"]
 
   timeouts {
