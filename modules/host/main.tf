@@ -18,7 +18,7 @@ locals {
 }
 
 resource "ibm_is_volume" "vpc_worker_volume" {
-  count = length(local.volumes)
+  count = length(var.vsi_volumes) > 0 ? length(local.volumes) : 0
   name = "volumen-${var.project}-worker-${var.environment}-${format("%03s", count.index + 1)}"
   profile = "10iops-tier"
   capacity = element(local.volumes, count.index).capacity
