@@ -18,10 +18,10 @@ locals {
 }
 
 resource "ibm_is_volume" "vpc_worker_volume" {
-  for_each = local.volumes
+  count = length(local.volumes)
   name = "volumen-${var.project}-${var.type}-${var.environment}-${format("%03s", count.index + 1)}"
   profile = "10iops-tier"
-  capacity = element(each, count.index).capacity
+  capacity = element(local.volumes, count.index).capacity
   resource_group = data.ibm_resource_group.resource_group.id
   zone = element(local.volumes, count.index).zone
 }
