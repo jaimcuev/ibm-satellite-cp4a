@@ -1,7 +1,7 @@
 locals {
-  controlplane_volumes = flatten([
-    for count in range(0, length(var.controlplane_vsi_zones)): []
-  ])
+  controlplane_volumes = [
+    for zone, count in var.controlplane_vsi_zones: []
+  ]
 }
 
 module "controlplane" {

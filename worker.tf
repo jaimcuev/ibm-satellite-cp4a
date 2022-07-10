@@ -8,11 +8,11 @@ resource "ibm_is_volume" "vpc_worker_volume" {
 }
 
 locals {
-  worker_volumes = flatten([
-    for count in range(0, length(var.worker_vsi_zones)): [
-      ibm_is_volume.vpc_worker_volume.*.id
+  worker_volumes = [
+    for zone, count in var.worker_vsi_zones: [
+      element(ibm_is_volume.vpc_worker_volume, count).id
     ]
-  ])
+  ]
 }
 
 module "worker" {
