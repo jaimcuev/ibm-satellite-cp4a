@@ -8,10 +8,9 @@ module "controlplane" {
   vpc_id = module.networking.vpc_id
   vpc_subnets = module.networking.vpc_subnets
   profile = var.controlplane_profile
-  vsi_zones = var.controlplane_vsi_zones
   ssh_key_id = ibm_is_ssh_key.ssh_key.id
   image = var.controlplane_image
-  vsi_volumes = []
+  vsi = var.controlplane_vsi
   type = "cp"
 
   depends_on = [module.networking]

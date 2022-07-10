@@ -7,21 +7,21 @@ data "ibm_resource_group" "resource_group" {
 }
 
 locals {
-  volumes = concat([
-    for zone in var.vsi_zones: [
-      for volume in var.vsi_volumes: {
-        capacity: volume,
-        zone: zone,
-      }
-    ]
+  volumes = flatten([
+    for vsi in var.vsi: flatten([
+      for volume in vsi.volumes: [{
+        zone: vsi.zone
+        capacity = volume
+      }]
+    ])
   ])
 }
 
 resource "ibm_is_volume" "vpc_worker_volume" {
-  count = length(var.vsi_volumes) > 0 ? length(local.volumes) : 0
-  name = "volumen-${var.project}-worker-${var.environment}-${format("%03s", count.index + 1)}"
+  for_each = local.volumes
+  name = "volumen-${var.project}-${var.type}-${var.environment}-${format("%03s", count.index + 1)}"
   profile = "10iops-tier"
-  capacity = element(local.volumes, count.index).capacity
+  capacity = element(each, count.index).capacity
   resource_group = data.ibm_resource_group.resource_group.id
   zone = element(local.volumes, count.index).zone
 }

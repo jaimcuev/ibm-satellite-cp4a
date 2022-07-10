@@ -28,6 +28,11 @@ variable "vpc_subnets" {
   description = "Subnets del VPC"
 }
 
+variable "type" {
+  default = "worker"
+  description = "Tipo de VSI a crear"
+}
+
 variable "ssh_key_id" {
   type = string
   description = "ID de la llave SSH de RHEL"
@@ -43,19 +48,20 @@ variable "profile" {
   description = "Profile de las VSI"
 }
 
-variable "vsi_zones" {
-  type = list
-  default = ["us-east-1", "us-east-2", "us-east-3"]
-  description = "Zona para cada VSI a crear"
-}
-
-variable "type" {
-  default = "worker"
-  description = "Tipo de VSI a crear"
-}
-
-variable "vsi_volumes" {
-  type = list
-  default = []
-  description = "Capacidad de volumenes a asignar a la VSI"
+variable "vsi" {
+  type = list(object({
+    zone = string
+    volumes = list(number)
+  }))
+  default = [{
+    zone = "us-east-1"
+    volumes = []
+  }, {
+    zone = "us-east-2"
+    volumes = []
+  }, {
+    zone = "us-east-3"
+    volumes = []
+  }]
+  description = "Caracteristicas de las VSI a crear"
 }
