@@ -42,13 +42,13 @@ variable "controlplane_vsi" {
   default = [
     {
       zone = "us-east-1a"
-      volumes = [1]
+      volumes = []
     }, {
       zone = "us-east-1b"
-      volumes = [1]
+      volumes = []
     }, {
       zone = "us-east-1c"
-      volumes = [1]
+      volumes = []
     }
   ]
   description = "Caracteristicas de las VSI a crear para el Control Plane"
