@@ -8,7 +8,7 @@ resource "ibm_is_volume" "vpc_worker_volume" {
 }
 
 locals {
-  volumes = flatten([
+  worker_volumes = flatten([
     for count in range(0, length(var.worker_vsi_zones)): [
       ibm_is_volume.vpc_worker_volume.*.id
     ]
@@ -28,7 +28,7 @@ module "worker" {
   vsi_zones = var.worker_vsi_zones
   ssh_key_id = ibm_is_ssh_key.ssh_key.id
   image = var.worker_image
-  volumes = local.volumes
+  volumes = local.worker_volumes
   type = "worker"
 
   depends_on = [module.networking]

@@ -1,3 +1,9 @@
+locals {
+  controlplane_volumes = flatten([
+    for count in range(0, length(var.controlplane_vsi_zones)): []
+  ])
+}
+
 module "controlplane" {
   source = "./modules/host"
   
@@ -11,7 +17,7 @@ module "controlplane" {
   vsi_zones = var.controlplane_vsi_zones
   ssh_key_id = ibm_is_ssh_key.ssh_key.id
   image = var.controlplane_image
-  volumes = []
+  volumes = local.controlplane_volumes
   type = "cp"
 
   depends_on = [module.networking]
