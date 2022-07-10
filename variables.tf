@@ -18,8 +18,13 @@ variable "ibm_region" {
   default = "us-east"
 }
 
-
 variable "resource_group" {
   default = ""
   description = "Nombre del resource group donde se desea crear los recursos"
+}
+
+variable "vpc_zones" {
+  type = list
+  default = ["us-east-1", "us-east-2", "us-east-3"]
+  description = "Zonas de las subredes de la VPC"
 }
