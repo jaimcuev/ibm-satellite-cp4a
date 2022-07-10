@@ -1,7 +1,3 @@
-data "ibm_resource_group" "resource_group" {
-  name = var.resource_group
-}
-
 resource "ibm_is_volume" "vpc_worker_volume" {
   count = length(var.worker_vsi_zones)
   name = "volumen-${var.project}-worker-${var.environment}-${format("%03s", count.index + 1)}"

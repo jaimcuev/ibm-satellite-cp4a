@@ -1,7 +1,3 @@
-data "ibm_resource_group" "resource_group" {
-  name = var.resource_group
-}
-
 resource "tls_private_key" "private_key" {
   algorithm = "RSA"
   rsa_bits  = 4096
