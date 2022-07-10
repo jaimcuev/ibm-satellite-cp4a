@@ -9,13 +9,11 @@ data "ibm_resource_group" "resource_group" {
 locals {
   volumes = concat([
     for zone in var.vsi_zones: [
-      for volume in var.vsi_volumes: [
-        {
-          name: "vsi-volume-" + zone + "-" + str(volume),
-          capacity: volume,
-          zone: zone,
-        },
-      ]
+      for volume in var.vsi_volumes: {
+        name: "vsi-volume-" + zone + "-" + str(volume),
+        capacity: volume,
+        zone: zone,
+      }
     ]
   ])
 }
