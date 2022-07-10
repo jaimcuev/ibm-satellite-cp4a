@@ -14,15 +14,14 @@ resource "ibm_is_instance" "vpc_controlplane_vsi" {
   profile = var.profile
   resource_group = data.ibm_resource_group.resource_group.id
 
+  vpc = var.vpc_id
+  zone = element(var.vsi_zones, count.index)
+  keys = [var.ssh_key_id]
+
   primary_network_interface {
     subnet = var.vpc_subnets[index(var.vpc_subnets.*.zone, element(var.vsi_zones, count.index))].id
     allow_ip_spoofing = false
   }
-  
-  vpc = var.vpc_id
-  zone = element(var.vsi_zones, count.index)
-  keys = [var.rhel_ssh_key_id]
-  tags = ["use:satloc"]
 
   timeouts {
     create = "15m"

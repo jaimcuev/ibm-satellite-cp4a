@@ -28,7 +28,7 @@ variable "vpc_subnets" {
   description = "Subnets del VPC"
 }
 
-variable "rhel_ssh_key_id" {
+variable "ssh_key_id" {
   type = string
   description = "ID de la llave SSH de RHEL"
 }
