@@ -40,6 +40,11 @@ variable "vpc_cidr_blocks" {
   description = "Rango de IPs por zona de la VPC"
 }
 
+variable "controlplane_image" {
+  default = "ibm-redhat-7-9-minimal-amd64-5"
+  description = "Imagen que se usara para las VSIs del Control Plane"
+}
+
 variable "controlplane_profile" {
   default = "bx2-4x16"
   description = "Profile de la VSI para el Control Plane"

@@ -10,6 +10,7 @@ module "controlplane" {
   profile = var.controlplane_profile
   vsi_zones = var.controlplane_vsi_zones
   rhel_ssh_key_id = ibm_is_ssh_key.rhel_ssh_key.id
+  image = var.controlplane_image
 
   depends_on = [module.networking]
 }

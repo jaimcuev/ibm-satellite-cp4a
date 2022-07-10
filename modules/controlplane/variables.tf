@@ -33,6 +33,11 @@ variable "rhel_ssh_key_id" {
   description = "ID de la llave SSH de RHEL"
 }
 
+variable "image" {
+  default = "ibm-redhat-7-9-minimal-amd64-5"
+  description = "Imagen que se usara para las VSIs"
+}
+
 variable "profile" {
   default = "bx2-4x16"
   description = "Profile de la VSI para el Control Plane"
