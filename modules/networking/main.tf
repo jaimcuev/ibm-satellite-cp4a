@@ -22,5 +22,4 @@ resource ibm_is_subnet "vpc_subnet" {
   zone = element(var.zones, count.index)
   resource_group = data.ibm_resource_group.resource_group.id
   public_gateway = element(ibm_is_public_gateway.vpc_gateway, count.index).id
-  tags = var.tags
 }
