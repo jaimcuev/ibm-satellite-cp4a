@@ -21,12 +21,12 @@ locals {
 }
 
 resource "ibm_is_volume" "vpc_worker_volume" {
-  count = length(var.volumes)
+  count = length(local.volumes)
   name = "volumen-${var.project}-worker-${var.environment}-${format("%03s", count.index + 1)}"
   profile = "10iops-tier"
-  capacity = element(var.volumes, count.index).capacity
+  capacity = element(local.volumes, count.index).capacity
   resource_group = data.ibm_resource_group.resource_group.id
-  zone = element(var.volumes, count.index).zone
+  zone = element(local.volumes, count.index).zone
 }
 
 # resource "ibm_is_instance" "vpc_host_vsi" {
