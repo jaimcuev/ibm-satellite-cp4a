@@ -14,3 +14,13 @@ resource "ibm_is_public_gateway" "vpc_gateway" {
   zone = element(var.zones, count.index)
   resource_group = data.ibm_resource_group.resource_group.id
 }
+
+resource ibm_is_subnet "vpc_subnet" {
+  count = length(var.zones)
+  name = "subnet-${var.project}-${var.environment}-${format("%03s", count.index + 1)}"
+  vpc = ibm_is_vpc.vpc_vm.id
+  zone = element(var.zones, count.index)
+  resource_group = data.ibm_resource_group.resource_group.id
+  public_gateway = element(ibm_is_public_gateway.vpc_gateway, count.index).id
+  tags = var.tags
+}
