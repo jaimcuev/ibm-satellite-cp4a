@@ -40,13 +40,13 @@ variable "image" {
 
 variable "profile" {
   default = "bx2-4x16"
-  description = "Profile de la VSI para el Control Plane"
+  description = "Profile de las VSI"
 }
 
 variable "vsi_zones" {
   type = list
   default = ["us-east-1", "us-east-2", "us-east-3"]
-  description = "Zona para cada VSI a crear para el Control Plane"
+  description = "Zona para cada VSI a crear"
 }
 
 variable "type" {

@@ -1,3 +1,3 @@
-output "controlplane_hosts" {
-  value = ibm_is_instance.vpc_controlplane_vsi[*].name
+output "hosts" {
+  value = ibm_is_instance.vpc_host_vsi[*].name
 }
