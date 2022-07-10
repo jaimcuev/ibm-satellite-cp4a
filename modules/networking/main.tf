@@ -2,7 +2,7 @@ data "ibm_resource_group" "resource_group" {
   name = var.resource_group
 }
 
-resource "ibm_is_vpc" "vpc_vm" {
+resource "ibm_is_vpc" "vpc" {
   name = "vpc-${var.project}-${var.environment}-001"
   resource_group = data.ibm_resource_group.resource_group.id
 }
@@ -10,7 +10,7 @@ resource "ibm_is_vpc" "vpc_vm" {
 resource "ibm_is_public_gateway" "vpc_gateway" {
   count = 3
   name = "gateway-${var.project}-${var.environment}-${format("%03s", count.index + 1)}"
-  vpc  = ibm_is_vpc.vpc_vm.id
+  vpc  = ibm_is_vpc.vpc.id
   zone = "${var.ibm_region}-${count.index + 1}"
   resource_group = data.ibm_resource_group.resource_group.id
 }
@@ -18,7 +18,7 @@ resource "ibm_is_public_gateway" "vpc_gateway" {
 resource ibm_is_subnet "vpc_subnet" {
   count = 3
   name = "subnet-${var.project}-${var.environment}-${format("%03s", count.index + 1)}"
-  vpc = ibm_is_vpc.vpc_vm.id
+  vpc = ibm_is_vpc.vpc.id
   zone = "${var.ibm_region}-${count.index + 1}"
   total_ipv4_address_count = 256
   resource_group = data.ibm_resource_group.resource_group.id

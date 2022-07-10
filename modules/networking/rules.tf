@@ -1,110 +1,87 @@
-data "ibm_is_security_group" "vpc_security_group" {
-  name = ibm_is_vpc.vpc_vm.security_group[0].group_name
-}
-
-resource "ibm_is_security_group_rule" "outbound_tcp_3389_3389" {
-  group = data.ibm_is_security_group.vpc_security_group.id
-  direction = "outbound"
-  tcp {
-    port_min = 3389
-    port_max = 3389
-  }
-}
-
-resource "ibm_is_security_group_rule" "outbound_tcp_443_443" {
-  group = data.ibm_is_security_group.vpc_security_group.id
-  direction = "outbound"
-  tcp {
-    port_min = 443
-    port_max = 443
-  }
-}
-
-resource "ibm_is_security_group_rule" "outbound_udp_30000_32767" {
-  group = data.ibm_is_security_group.vpc_security_group.id
-  direction = "outbound"
-  udp {
-    port_min = 30000
-    port_max = 32767
-  }
-}
-
-resource "ibm_is_security_group_rule" "outbound_tcp_30000_32767" {
-  group = data.ibm_is_security_group.vpc_security_group.id
-  direction = "outbound"
-  tcp {
-    port_min = 30000
-    port_max = 32767
-  }
-}
-
-resource "ibm_is_security_group_rule" "outbound_tcp_80_80" {
-  group = data.ibm_is_security_group.vpc_security_group.id
-  direction = "outbound"
-  tcp {
-    port_min = 80
-    port_max = 80
-  }
-}
-
-resource "ibm_is_security_group_rule" "inbound_tcp_22_22" {
-  group = data.ibm_is_security_group.vpc_security_group.id
+resource "ibm_is_security_group_rule" "sg-rule-inbound-ssh" {
+  group     = ibm_is_vpc.vpc.default_security_group
   direction = "inbound"
+  remote    = "0.0.0.0/0"
+
   tcp {
     port_min = 22
     port_max = 22
   }
 }
 
-resource "ibm_is_security_group_rule" "inbound_icmp" {
-  group = data.ibm_is_security_group.vpc_security_group.id
+resource "ibm_is_security_group_rule" "sg-rule-inbound-http" {
+  group     = ibm_is_vpc.vpc.default_security_group
   direction = "inbound"
-  icmp {
-    type = 8
+  remote    = "0.0.0.0/0"
+
+  tcp {
+    port_min = 80
+    port_max = 80
   }
 }
 
-resource "ibm_is_security_group_rule" "inbound_udp_30000_32767" {
-  group = data.ibm_is_security_group.vpc_security_group.id
+resource "ibm_is_security_group_rule" "sg-rule-inbound-https" {
+  group     = ibm_is_vpc.vpc.default_security_group
   direction = "inbound"
-  udp {
-    port_min = 30000
-    port_max = 32767
-  }
-}
+  remote    = "0.0.0.0/0"
 
-resource "ibm_is_security_group_rule" "inbound_tcp_443_443" {
-  group = data.ibm_is_security_group.vpc_security_group.id
-  direction = "inbound"
   tcp {
     port_min = 443
     port_max = 443
   }
 }
 
-resource "ibm_is_security_group_rule" "inbound_tcp_3389_3389" {
-  group = data.ibm_is_security_group.vpc_security_group.id
+resource "ibm_is_security_group_rule" "sg-rule-inbound-api" {
+  group     = ibm_is_vpc.vpc.default_security_group
   direction = "inbound"
-  tcp {
-    port_min = 3389
-    port_max = 3389
-  }
-}
+  remote    = "0.0.0.0/0"
 
-resource "ibm_is_security_group_rule" "inbound_tcp_30000_32767" {
-  group = data.ibm_is_security_group.vpc_security_group.id
-  direction = "inbound"
   tcp {
     port_min = 30000
     port_max = 32767
   }
 }
 
-resource "ibm_is_security_group_rule" "inbound_tcp_80_80" {
-  group = data.ibm_is_security_group.vpc_security_group.id
+resource "ibm_is_security_group_rule" "sg-rule-inbound-api2" {
+  group     = ibm_is_vpc.vpc.default_security_group
   direction = "inbound"
-  tcp {
-    port_min = 80
-    port_max = 80
+  remote    = "0.0.0.0/0"
+
+  udp {
+    port_min = 30000
+    port_max = 32767
   }
+}
+
+resource "ibm_is_security_group_rule" "sg-rule-inbound-icmp" {
+  group     = ibm_is_vpc.vpc.default_security_group
+  direction = "inbound"
+  remote    = "0.0.0.0/0"
+
+  icmp {
+    type = 8
+  }
+}
+
+resource "ibm_is_security_group_rule" "sg-rule-outbound" {
+  group     = ibm_is_vpc.vpc.default_security_group
+  direction = "outbound"
+  remote    = "0.0.0.0/0"
+
+  tcp {
+    port_min = 1
+    port_max = 65535
+  }
+}
+
+resource "ibm_is_security_group_rule" "sg-rule-inbound-from-the-group" {
+  group     = ibm_is_vpc.vpc.default_security_group
+  direction = "inbound"
+  remote    = ibm_is_vpc.vpc.default_security_group
+}
+
+resource "ibm_is_security_group_rule" "sg-rule-outbound-to-the-group" {
+  group     = ibm_is_vpc.vpc.default_security_group
+  direction = "outbound"
+  remote    = ibm_is_vpc.vpc.default_security_group
 }

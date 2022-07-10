@@ -28,18 +28,6 @@ variable "rhel_public_ssh_key" {
   description = "Llave SSH publica para VSIs de RHEL" 
 }
 
-variable "vpc_zones" {
-  type = list
-  default = ["us-east-1", "us-east-2", "us-east-3"]
-  description = "Zonas de las subredes de la VPC"
-}
-
-variable "vpc_cidr_blocks" {
-  type = list
-  default = ["10.241.0.0/18", "10.241.64.0/18", "10.241.128.0/18"]
-  description = "Rango de IPs por zona de la VPC"
-}
-
 variable "controlplane_image" {
   default = "ibm-redhat-7-9-minimal-amd64-5"
   description = "Imagen que se usara para las VSIs del Control Plane"
