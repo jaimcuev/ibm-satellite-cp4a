@@ -86,13 +86,13 @@ variable "odf_vsi" {
   }))
   default = [{
     zone = "us-east-1"
-    volumes = [100, 500, 500]
+    volumes = [100, 500]
   }, {
     zone = "us-east-2"
-    volumes = [100, 500, 500]
+    volumes = [100, 500]
   }, {
     zone = "us-east-3"
-    volumes = [100, 500, 500]
+    volumes = [100, 500]
   }]
   description = "Caracteristicas de las VSI a crear para los Workers de ODF"
 }
