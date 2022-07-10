@@ -23,11 +23,6 @@ variable "resource_group" {
   description = "Nombre del resource group donde se desea crear los recursos"
 }
 
-variable "rhel_public_ssh_key" {
-  default = ""
-  description = "Llave SSH publica para VSIs de RHEL" 
-}
-
 variable "controlplane_image" {
   default = "ibm-redhat-7-9-minimal-amd64-5"
   description = "Imagen que se usara para las VSIs del Control Plane"
