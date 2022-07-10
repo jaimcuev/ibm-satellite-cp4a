@@ -5,4 +5,5 @@ module "networking" {
   project = var.project
   environment = var.environment
   zones = var.vpc_zones
+  cidr_blocks = var.vpc_cidr_blocks
 }

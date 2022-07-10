@@ -28,3 +28,9 @@ variable "vpc_zones" {
   default = ["us-east-1", "us-east-2", "us-east-3"]
   description = "Zonas de las subredes de la VPC"
 }
+
+variable "vpc_cidr_blocks" {
+  type = list
+  default = ["10.240.0.0/18", "10.240.64.0/18", "10.240.128.0/18"]
+  description = "Rango de IPs por zona de la VPC"
+}
