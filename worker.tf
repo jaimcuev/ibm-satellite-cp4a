@@ -8,10 +8,9 @@ module "worker" {
   vpc_id = module.networking.vpc_id
   vpc_subnets = module.networking.vpc_subnets
   profile = var.worker_profile
-  vsi_zones = var.worker_vsi_zones
   ssh_key_id = ibm_is_ssh_key.ssh_key.id
   image = var.worker_image
-  vsi_volumes = [100, 500, 500]
+  vsi = var.worker_vsi
   type = "worker"
 
   depends_on = [module.networking]

@@ -61,10 +61,22 @@ variable "worker_profile" {
   description = "Profile de la VSI para los Workers"
 }
 
-variable "worker_vsi_zones" {
-  type = list
-  default = ["us-east-1", "us-east-2", "us-east-3"]
-  description = "Zona para cada VSI a crear para los Workers"
+variable "worker_vsi" {
+  type = list(object({
+    zone = string
+    volumes = list(number)
+  }))
+  default = [{
+    zone = "us-east-1"
+    volumes = [100, 500, 500]
+  }, {
+    zone = "us-east-2"
+    volumes = [100, 500, 500]
+  }, {
+    zone = "us-east-3"
+    volumes = [100, 500, 500]
+  }]
+  description = "Caracteristicas de las VSI a crear para los Workers"
 }
 
 variable "satellite_location_zones" {
