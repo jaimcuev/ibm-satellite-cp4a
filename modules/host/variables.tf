@@ -49,4 +49,12 @@ variable "vsi_zones" {
   description = "Zona para cada VSI a crear para el Control Plane"
 }
 
+variable "type" {
+  default = "worker"
+  description = "Tipo de VSI a crear"
+}
 
+variable "volumes" {
+  type = list
+  description = "Volumenes a asignar a la VSI"
+}

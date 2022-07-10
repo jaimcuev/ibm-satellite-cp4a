@@ -1,5 +1,5 @@
 module "controlplane" {
-  source = "./modules/controlplane"
+  source = "./modules/host"
   
   project = var.project
   environment = var.environment
@@ -11,6 +11,8 @@ module "controlplane" {
   vsi_zones = var.controlplane_vsi_zones
   ssh_key_id = ibm_is_ssh_key.ssh_key.id
   image = var.controlplane_image
+  volumes = []
+  type = "cp"
 
   depends_on = [module.networking]
 }

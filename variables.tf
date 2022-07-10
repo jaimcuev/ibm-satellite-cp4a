@@ -39,6 +39,22 @@ variable "controlplane_vsi_zones" {
   description = "Zona para cada VSI a crear para el Control Plane"
 }
 
+variable "worker_image" {
+  default = "ibm-redhat-7-9-minimal-amd64-5"
+  description = "Imagen que se usara para las VSIs de los Workers"
+}
+
+variable "worker_profile" {
+  default = "bx2-4x16"
+  description = "Profile de la VSI para los Workers"
+}
+
+variable "worker_vsi_zones" {
+  type = list
+  default = ["us-east-1", "us-east-2", "us-east-3"]
+  description = "Zona para cada VSI a crear para los Workers"
+}
+
 variable "satellite_location_zones" {
   type = list
   default = ["us-east-1", "us-east-2", "us-east-3"]
