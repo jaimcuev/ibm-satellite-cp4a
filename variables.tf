@@ -55,3 +55,24 @@ variable "controlplane_vsi_zones" {
   default = ["us-east-1", "us-east-2", "us-east-3"]
   description = "Zona para cada VSI a crear para el Control Plane"
 }
+
+variable "satellite_location_zones" {
+  type = list
+  default = ["us-east-1", "us-east-2", "us-east-3"]
+  description = "Nombres de las zonas para el Location de Satellite"
+}
+
+variable "satellite_managed_from" {
+  default = "wdc"
+  description = "Region de IBM Cloud para gestionar el Location de Satellite"
+}
+
+variable "satellite_resource_group" {
+  default = ""
+  description = "Nombre del resource group donde se desea crear los recursos de Satellite"
+}
+
+variable "satellite_ibmcloud_api_key" {
+  default = ""
+  description = "IBM Cloud API Key"
+}
