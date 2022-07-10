@@ -31,6 +31,6 @@ variable "vpc_zones" {
 
 variable "vpc_cidr_blocks" {
   type = list
-  default = ["10.240.0.0/18", "10.240.64.0/18", "10.240.128.0/18"]
+  default = ["10.241.0.0/18", "10.241.64.0/18", "10.241.128.0/18"]
   description = "Rango de IPs por zona de la VPC"
 }
