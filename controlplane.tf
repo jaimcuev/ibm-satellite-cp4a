@@ -1,9 +1,3 @@
-locals {
-  controlplane_volumes = [
-    for zone, count in var.controlplane_vsi_zones: []
-  ]
-}
-
 module "controlplane" {
   source = "./modules/host"
   
@@ -17,7 +11,7 @@ module "controlplane" {
   vsi_zones = var.controlplane_vsi_zones
   ssh_key_id = ibm_is_ssh_key.ssh_key.id
   image = var.controlplane_image
-  volumes = local.controlplane_volumes
+  vsi_volumes = []
   type = "cp"
 
   depends_on = [module.networking]

@@ -54,8 +54,8 @@ variable "type" {
   description = "Tipo de VSI a crear"
 }
 
-variable "volumes" {
+variable "vsi_volumes" {
   type = list
   default = []
-  description = "Volumenes a asignar a la VSI"
+  description = "Capacidad de volumenes a asignar a la VSI"
 }

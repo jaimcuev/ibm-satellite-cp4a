@@ -1,20 +1,3 @@
-resource "ibm_is_volume" "vpc_worker_volume" {
-  count = length(var.worker_vsi_zones)
-  name = "volumen-${var.project}-worker-${var.environment}-${format("%03s", count.index + 1)}"
-  profile = "10iops-tier"
-  capacity = 100
-  resource_group = data.ibm_resource_group.resource_group.id
-  zone = element(var.worker_vsi_zones, count.index)
-}
-
-locals {
-  worker_volumes = [
-    for zone, count in var.worker_vsi_zones: [
-      element(ibm_is_volume.vpc_worker_volume, count).id
-    ]
-  ]
-}
-
 module "worker" {
   source = "./modules/host"
   
@@ -28,7 +11,7 @@ module "worker" {
   vsi_zones = var.worker_vsi_zones
   ssh_key_id = ibm_is_ssh_key.ssh_key.id
   image = var.worker_image
-  volumes = local.worker_volumes
+  vsi_volumes = [100, 500, 500]
   type = "worker"
 
   depends_on = [module.networking]
