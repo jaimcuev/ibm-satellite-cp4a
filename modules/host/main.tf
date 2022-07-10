@@ -17,7 +17,7 @@ resource "ibm_is_instance" "vpc_controlplane_vsi" {
   vpc = var.vpc_id
   zone = element(var.vsi_zones, count.index)
   keys = [var.ssh_key_id]
-  volumes = element(var.volumes, count.index) 
+  volumes = element(var.volumes, count.index) != null ? element(var.volumes, count.index) : [] 
 
   primary_network_interface {
     subnet = var.vpc_subnets[index(var.vpc_subnets.*.zone, element(var.vsi_zones, count.index))].id

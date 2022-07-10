@@ -56,5 +56,6 @@ variable "type" {
 
 variable "volumes" {
   type = list
+  default = []
   description = "Volumenes a asignar a la VSI"
 }
