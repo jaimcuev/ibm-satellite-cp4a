@@ -11,7 +11,7 @@ resource "ibm_is_instance" "vpc_controlplane_vsi" {
   
   name = "vsi-${var.project}-cp-${var.environment}-${format("%03s", count.index + 1)}"
   image = data.ibm_is_image.image_vm.id
-  profile = var.controlplane_profile
+  profile = var.profile
   resource_group = data.ibm_resource_group.resource_group.id
 
   primary_network_interface {
