@@ -33,6 +33,27 @@ variable "controlplane_profile" {
   description = "Profile de la VSI para el Control Plane"
 }
 
+
+variable "controlplane_vsi" {
+  type = list(object({
+    zone = string
+    volumes = list(number)
+  }))
+  default = [
+    {
+      zone = "us-east-1a"
+      volumes = [1]
+    }, {
+      zone = "us-east-1b"
+      volumes = [1]
+    }, {
+      zone = "us-east-1c"
+      volumes = [1]
+    }
+  ]
+  description = "Caracteristicas de las VSI a crear para el Control Plane"
+}
+
 variable "controlplane_vsi_zones" {
   type = list
   default = ["us-east-1", "us-east-2", "us-east-3"]
