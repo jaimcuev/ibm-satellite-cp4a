@@ -19,17 +19,17 @@ variable "resource_group" {
 }
 
 variable "vpc_id" {
-  type = "string"
+  type = string
   description = "ID del VPC"
 }
 
 variable "vpc_subnets" {
-  type = "list"
+  type = list
   description = "Subnets del VPC"
 }
 
 variable "rhel_ssh_key_id" {
-  type = "string"
+  type = string
   description = "ID de la llave SSH de RHEL"
 }
 
