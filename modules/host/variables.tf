@@ -19,7 +19,7 @@ variable "resource_group" {
 }
 
 variable "location" {
-  type = "string"
+  type = string
   default = ""
   description = "Identificador del Satellite Location"
 }
