@@ -41,7 +41,7 @@ resource "ibm_cos_bucket" "cos_bucket" {
 }
 
 data "ibm_satellite_location" "location" {
-  location   =ibm_satellite_location.create_location.0.id
+  location = ibm_satellite_location.create_location.id
   depends_on = [ibm_satellite_location.create_location]
 }
 
