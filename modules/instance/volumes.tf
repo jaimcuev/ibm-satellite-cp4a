@@ -2,7 +2,7 @@ locals {
   volumes = flatten([
     for index, vsi in var.vsi: flatten([
       for volume in vsi.volumes: [{
-        instance = ibm_is_instance.vpc_host_vsi[index].id
+        instance = ibm_is_instance.instance_vsi[index].id
         capacity = volume
       }]
     ])
@@ -22,7 +22,7 @@ resource "ibm_is_instance_volume_attachment" "example" {
   volume_name = "vol-${var.project}-${var.type}-${var.environment}-${format("%03s", count.index + 1)}"
 
   depends_on = [
-    ibm_is_instance.vpc_host_vsi
+    ibm_is_instance.instance_vsi
   ]
 
   timeouts {

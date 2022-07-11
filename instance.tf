@@ -10,7 +10,7 @@ resource "ibm_is_ssh_key" "ssh_key" {
 }
 
 module "controlplane" {
-  source = "./modules/host"
+  source = "./modules/instance"
   
   project = var.project
   environment = var.environment
@@ -28,7 +28,7 @@ module "controlplane" {
 }
 
 module "worker" {
-  source = "./modules/host"
+  source = "./modules/instance"
   
   project = var.project
   environment = var.environment
@@ -46,7 +46,7 @@ module "worker" {
 }
 
 module "odf" {
-  source = "./modules/host"
+  source = "./modules/instance"
   
   project = var.project
   environment = var.environment

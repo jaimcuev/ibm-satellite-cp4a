@@ -1,3 +1,3 @@
-output "hosts" {
-  value = ibm_is_instance.vpc_host_vsi[*].name
+output "location" {
+  value = ibm_satellite_host.assign_host.0.location
 }
